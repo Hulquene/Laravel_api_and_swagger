@@ -5,7 +5,7 @@ services:
     build:
       context: ./
       dockerfile: docker/php/DockerFile
-    container_name: gh-app
+    container_name: t1-app
     restart: always
     working_dir: /var/www/
     volumes:
@@ -22,10 +22,10 @@ services:
 
   nginx:
     image: nginx:1.25.1-alpine-slim
-    container_name: gh-nginx
+    container_name: t1-nginx
     restart: always
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - ./:/var/www
       - ./application:/var/www/application
@@ -35,7 +35,7 @@ services:
     build:
       context: ./
       dockerfile: docker/redis/DockerFile
-    container_name: gh-redis
+    container_name: t1-redis
     restart: always
     ports:
       - "6379:6379"
@@ -45,14 +45,14 @@ services:
     build:
       context: ./
       dockerfile: docker/db/DockerFile
-    container_name: gh-db
+    container_name: t1-db
     restart: always
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
+      - "5410:5432"
     volumes:
       - db:/var/lib/postgresql/data
 
